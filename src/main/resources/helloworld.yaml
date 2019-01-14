@@ -1,0 +1,95 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Hello World API
+  description: >-
+    A simple Hello World API that demonstrates features in the OpenAPI/Swagger 2.0 specification.
+  termsOfService: https://hello.world/terms/
+  contact:
+    name: Hello World Team
+    email: support@hello.world
+    url: https://hello.world
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: sync
+    description: Sync endpoints
+schemes:
+  - https
+host: 'api.hello.world'
+basePath: /v2
+paths:
+  /say/hello:
+    get:
+      operationId: getSayHello
+      tags:
+        - sync
+      summary: Retrieve greeting for name
+      description: |
+        Returns a greeting for the provided name.
+        Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet.
+
+        Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec.
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          in: query
+          description: Name to greet
+          required: true
+          type: string
+          x-example: 'Alice'
+      responses:
+        '200':
+          description: Greeting response
+          schema:
+            $ref: '#/definitions/HelloReply'
+          examples:
+            application/json: { "message": "Hello Alice!" }
+    post:
+      operationId: postSayHello
+      tags:
+        - sync
+      summary: Retrieve greeting for name
+      description: Retrieve greeting for name
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Name to greet
+          required: true
+          schema:
+            $ref: '#/definitions/HelloRequest'
+      responses:
+        '200':
+          description: Greeting response
+          schema:
+            $ref: '#/definitions/HelloReply'
+          examples:
+            application/json: { "message": "Hello Alice!" }
+
+definitions:
+  HelloRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+    example:
+      name: 'Alice'
+
+  HelloReply:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        type: string
+    example:
+      name: 'Hello Alice!'
+
