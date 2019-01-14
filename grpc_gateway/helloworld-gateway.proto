@@ -1,0 +1,64 @@
+//
+// * Hello World API.
+// *
+// * This file is really just an example. The data model is completely
+// * fictional.
+// 
+
+syntax = "proto3";
+
+package helloworld;
+
+option go_package = "helloworldpb";
+option java_multiple_files = true;
+option java_outer_classname = "HelloworldProto";
+option java_package = "com.helloworld";
+
+import "google/api/annotations.proto";
+
+//
+// * The greeting service definition.
+// 
+service GreeterService {
+  // Request a greeting
+  rpc SayHello(HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/say/hello"
+    };
+  }
+  // Request a greeting from a stream
+  rpc ItKeepsTalking(stream HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/it/keeps/talking"
+      body: "*"
+    };
+  }
+  // Request a greeting as a stream
+  rpc ItKeepsReplying(HelloRequest) returns (stream HelloReply) {
+    option (google.api.http) = {
+      post: "/it/keeps/replying"
+      body: "*"
+    };
+  }
+  // Request a greeting from a stream as a stream
+  rpc StreamHellos(stream HelloRequest) returns (stream HelloReply) {
+    option (google.api.http) = {
+      post: "/stream/hellos"
+      body: "*"
+    };
+  }
+}
+
+//
+// * Represents the request message containing the user's name.
+// 
+message HelloRequest {
+  string name = 1; // Name of the person to greet.
+}
+
+//
+// * Represents the response message containing the greetings
+// 
+message HelloReply {
+  string message = 1; // Greeting message.
+}

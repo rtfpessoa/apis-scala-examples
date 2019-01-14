@@ -1,0 +1,12 @@
+logs
+target
+build
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/.gradle
+/RUNNING_PID
+*.iml
+/grpc_gateway/stubs/
